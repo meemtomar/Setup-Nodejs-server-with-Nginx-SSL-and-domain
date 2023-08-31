@@ -43,9 +43,14 @@ pm2 startup ubuntu
 ```
 sudo ufw enable
 sudo ufw status
-sudo ufw allow ssh (Port 22)
-sudo ufw allow http (Port 80)
-sudo ufw allow https (Port 443)
+
+
+(Port 22)
+sudo ufw allow ssh
+(Port 80)
+sudo ufw allow http
+(Port 443)
+sudo ufw allow https
 ```
 
 ## 7. Install NGINX and configure
@@ -59,8 +64,9 @@ Add the following to the location part of the server block
     server_name yourdomain.com www.yourdomain.com;
 
     location / {
-        proxy_pass http://localhost:8001; #whatever port your app runs on
+        proxy_pass http://localhost:3000; #whatever port your app runs on
         proxy_http_version 1.1;
+        proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
         proxy_set_header Upgrade $http_upgrade;
         proxy_set_header Connection 'upgrade';
         proxy_set_header Host $host;
@@ -83,5 +89,5 @@ sudo apt-get install python3-certbot-nginx
 sudo certbot --nginx -d yourdomain.com -d www.yourdomain.com
 
 # Only valid for 90 days, test the renewal process with
-certbot renew --dry-run
+sudo certbot renew --dry-run
 ```
