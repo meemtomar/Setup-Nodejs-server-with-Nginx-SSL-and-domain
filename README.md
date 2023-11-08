@@ -88,7 +88,7 @@ certbot renew --dry-run
 ```
 
 ## 9. Symbolic Link Command to setup prod and dev
-...
+
 sudo ln -s /etc/nginx/sites-available/example.com.conf /etc/nginx/sites-enabled/example.com.conf
 
 
