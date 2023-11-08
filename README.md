@@ -60,6 +60,7 @@ Add the following to the location part of the server block
 
     location / {
         proxy_pass http://localhost:8001; #whatever port your app runs on
+        proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
         proxy_http_version 1.1;
         proxy_set_header Upgrade $http_upgrade;
         proxy_set_header Connection 'upgrade';
@@ -85,3 +86,9 @@ sudo certbot --nginx -d yourdomain.com -d www.yourdomain.com
 # Only valid for 90 days, test the renewal process with
 certbot renew --dry-run
 ```
+
+## 9. Symbolic Link Command to setup prod and dev
+...
+sudo ln -s /etc/nginx/sites-available/example.com.conf /etc/nginx/sites-enabled/example.com.conf
+
+
